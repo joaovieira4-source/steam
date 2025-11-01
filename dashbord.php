@@ -47,5 +47,6 @@
 
         mysqli_stmt_close($comando);    
     ?>
+
 </body>
 </html>
