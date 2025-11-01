@@ -1,8 +1,14 @@
 <?php
 session_start();
-$erro = isset($_SESSION['erro']) ? $_SESSION['erro'] : '';
-unset($_SESSION['erro']); // Limpa depois de pegar
-$_SESSION['usuario_logado'] = true; 
+
+// Pega mensagens de erro ou sucesso da sessão
+$erro = $_SESSION['erro'] ?? '';
+$msg  = $_SESSION['msg'] ?? '';
+
+// Limpa as mensagens da sessão
+unset($_SESSION['erro'], $_SESSION['msg']);
+
+// $_SESSION['usuario_logado'] = true; // opcional
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,20 +34,18 @@ $_SESSION['usuario_logado'] = true;
   <div class="login-container">
     <h2>Login</h2>
 
-        <?php
-        // Exibir mensagem de erro ou sucesso, se houver
-        if (!empty($_SESSION['erro'])) {
-            echo '<div class="erro-msg" style="color:red; margin-bottom:10px;">' . htmlspecialchars($_SESSION['erro']) . '</div>';
-            $_SESSION['erro'] = '';
-        }
+    <?php
+    // Exibir mensagem de erro, se houver
+    if (!empty($erro)) {
+        echo '<div class="erro-msg" style="color:red; margin-bottom:10px;">' . htmlspecialchars($erro) . '</div>';
+    }
 
-        if (!empty($_SESSION['msg'])) {
-            echo '<div class="msg-sucesso" style="color:green; margin-bottom:10px;">' . htmlspecialchars($_SESSION['msg']) . '</div>';
-            $_SESSION['msg'] = '';
-        }
-        ?>
+    // Exibir mensagem de sucesso, se houver
+    if (!empty($msg)) {
+        echo '<div class="msg-sucesso" style="color:green; margin-bottom:10px;">' . htmlspecialchars($msg) . '</div>';
+    }
+    ?>
 
-   
     <form action="salvar_login.php" method="POST">
       <div class="input-box">
         <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
@@ -68,7 +72,7 @@ $_SESSION['usuario_logado'] = true;
         Não tem uma conta? <a href="registro.php">Cadastrar</a>
       </p>
       <p class="register-link">
-        <a href="pagina.php">Permanecer anonimo</a>
+        <a href="pagina.php">Permanecer anônimo</a>
       </p>
     </form>
   </div>

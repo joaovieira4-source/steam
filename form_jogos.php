@@ -38,11 +38,6 @@ $stmtCat = mysqli_prepare($conexao, $sqlCat);
 mysqli_stmt_execute($stmtCat);
 $resultadosCat = mysqli_stmt_get_result($stmtCat);
 
-// Armazenar categorias em array
-$categorias = [];
-while ($row = mysqli_fetch_assoc($resultadosCat)) {
-    $categorias[] = $row;
-}
 
 ?>
 
@@ -76,11 +71,12 @@ while ($row = mysqli_fetch_assoc($resultadosCat)) {
         <select name="categoria">
             <option value="">Selecione</option>
             <?php
-            foreach ($categorias as $cat) {
-                $selected = ($cat['id_descricao'] == $categoria_id) ? 'selected' : '';
-                echo '<option value="' . $cat['id_descricao'] . '" ' . $selected . '>' 
-                    . htmlspecialchars($cat['categoria_nome']) . '</option>';
-            }
+// Executou a query e já tem $resultadosCat
+while ($cat = mysqli_fetch_assoc($resultadosCat)) {
+    $selected = ($cat['id'] == $categoria_id) ? 'selected' : '';
+    echo '<option value="' . $cat['id'] . '" ' . $selected . '>' 
+        . htmlspecialchars($cat['nome']) . '</option>';
+}
             ?>
         </select><br><br>
 
