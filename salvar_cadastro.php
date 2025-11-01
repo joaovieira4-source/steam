@@ -2,7 +2,7 @@
 require_once "conexao.php";
 session_start();
 
-// Recebe os dados do formulário
+// Recebe os dados do formulário'
 $usuario = trim($_POST['usuario']);
 $email = trim($_POST['email']);
 $senha = $_POST['senha'];

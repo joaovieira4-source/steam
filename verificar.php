@@ -6,21 +6,21 @@ $email = trim($_POST['email'] ?? '');
 $senha = $_POST['senha'] ?? null;
 $csenha = $_POST['senha1'] ?? null;
 
-// Decide tabela e colunas
+// Identifica se é administrador ou usuário comum
 if (str_ends_with($email, '@lojaexemplo.com')) {
     $tabela = 'tb_adm';
-    $col_nome = 'adm_nome';
-    $col_email = 'adm_email';
-    $col_senha = 'amd_senha';
+    $col_nome = 'nome';
+    $col_email = 'email';
+    $col_senha = 'senha';
 } else {
     $tabela = 'tb_usuario';
-    $col_nome = 'usuarios_nome';
-    $col_email = 'usuarios_email';
-    $col_senha = 'usuarios_senha';
+    $col_nome = 'nome';
+    $col_email = 'email';
+    $col_senha = 'senha';
 }
 
-// Primeira vez: verificar se email existe
-if (!empty($_SESSION['senha']) && $_SESSION['senha'] == 1) {
+// === ETAPA 1: Verificar se o e-mail existe ===
+if (!isset($_SESSION['etapa']) || $_SESSION['etapa'] === 1) {
 
     if ($email === '') {
         $_SESSION['erro'] = "O campo de email não pode ficar vazio.";
@@ -30,6 +30,7 @@ if (!empty($_SESSION['senha']) && $_SESSION['senha'] == 1) {
 
     $sql = "SELECT $col_nome FROM $tabela WHERE $col_email = ?";
     $stmt = mysqli_prepare($conexao, $sql);
+
     if (!$stmt) {
         $_SESSION['erro'] = "Erro na preparação da query: " . mysqli_error($conexao);
         header("Location: editar_senha.php");
@@ -41,9 +42,12 @@ if (!empty($_SESSION['senha']) && $_SESSION['senha'] == 1) {
     mysqli_stmt_store_result($stmt);
 
     if (mysqli_stmt_num_rows($stmt) > 0) {
-        mysqli_stmt_close($stmt);
-        header("Location: editar_senha.php"); // email existe, segue para cadastro nova senha
+        // E-mail encontrado → próxima etapa
         $_SESSION['email'] = $email;
+        $_SESSION['etapa'] = 2;
+        $_SESSION['msg'] = "Email encontrado! Agora cadastre sua nova senha.";
+        mysqli_stmt_close($stmt);
+        header("Location: editar_senha.php");
         exit;
     } else {
         mysqli_stmt_close($stmt);
@@ -52,43 +56,51 @@ if (!empty($_SESSION['senha']) && $_SESSION['senha'] == 1) {
         exit;
     }
 
-} else {
-    // Atualizar senha
-    if ($senha === '' || $senha !== $csenha) {
-        $_SESSION['erro'] = "Senhas não conferem ou estão vazias!";
-        header("Location: editar_senha.php");
-        exit;
-    }
-
-    $hash = password_hash($csenha, PASSWORD_DEFAULT);
-
-
-
-     $sql = "UPDATE $tabela SET $col_senha = ? WHERE $col_email = ?";
-     $stmt = mysqli_prepare($conexao, $sql);
-     if (!$stmt) {
-         $_SESSION['erro'] = "Erro na preparação da query: " . mysqli_error($conexao);
-         header("Location: editar_senha.php");
-         exit;
-     }
-
-     mysqli_stmt_bind_param($stmt, "ss", $hash, $email);
-     mysqli_stmt_execute($stmt);
-
-     if (mysqli_stmt_affected_rows($stmt) > 0) {
-         $_SESSION['msg'] = "Senha atualizada com sucesso!";
-         mysqli_stmt_close($stmt);
-         mysqli_close($conexao);
-         header("Location: pagina.php");
-         exit;
-     } else {
-         mysqli_stmt_close($stmt);
-         mysqli_close($conexao);
-         $_SESSION['erro'] = "Falha ao atualizar senha. Verifique o email.";
-         header("Location: editar_senha.php");
-         exit;
-     }
 }
 
-mysqli_close($conexao);
+// === ETAPA 2: Atualizar senha ===
+if ($senha === '' || $senha !== $csenha) {
+    $_SESSION['erro'] = "Senhas não conferem ou estão vazias!";
+    header("Location: editar_senha.php");
+    exit;
+}
+
+// Verifica se há e-mail salvo na sessão
+if (empty($_SESSION['email'])) {
+    $_SESSION['erro'] = "Sessão expirada. Digite seu email novamente.";
+    $_SESSION['etapa'] = 1;
+    header("Location: editar_senha.php");
+    exit;
+}
+
+$email = $_SESSION['email'];
+$hash = password_hash($csenha, PASSWORD_DEFAULT);
+
+$sql = "UPDATE $tabela SET $col_senha = ? WHERE $col_email = ?";
+$stmt = mysqli_prepare($conexao, $sql);
+
+if (!$stmt) {
+    $_SESSION['erro'] = "Erro na preparação da query: " . mysqli_error($conexao);
+    header("Location: editar_senha.php");
+    exit;
+}
+
+mysqli_stmt_bind_param($stmt, "ss", $hash, $email);
+mysqli_stmt_execute($stmt);
+
+if (mysqli_stmt_affected_rows($stmt) > 0) {
+    $_SESSION['msg'] = "Senha atualizada com sucesso!";
+    unset($_SESSION['etapa']);
+    unset($_SESSION['email']);
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexao);
+    header("Location: pagina.php");
+    exit;
+} else {
+    $_SESSION['erro'] = "Falha ao atualizar senha. Verifique o email.";
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexao);
+    header("Location: editar_senha.php");
+    exit;
+}
 ?>
