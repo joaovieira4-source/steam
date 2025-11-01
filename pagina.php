@@ -64,8 +64,8 @@ mysqli_close($conexao);
                 </ion-icon>
             </div>
             <div class="profile-menu" id="profileMenu">
-                <a href="carrinho.php" class="menu-item">
-                    <ion-icon name="cart-outline"></ion-icon> Carrinho
+                <a href="jogos.php?id=<?php echo $idUsuario;?>" class="menu-item">
+                    <ion-icon name="cart-outline"></ion-icon> Meus Jogos
                 </a>
                 <a href="#" class="menu-item">
                     <ion-icon name="settings-outline"></ion-icon> Configurações

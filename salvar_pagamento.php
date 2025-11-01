@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "conexao.php";
 
 $data = $_POST['data'];
@@ -16,5 +17,5 @@ mysqli_stmt_execute($comando);
 mysqli_stmt_close($comando);
 
 header("Location: pagina.php");
-
+exit;
 ?>

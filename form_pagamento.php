@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once "conexao.php";
+
+$idUsuarioLogado = $_SESSION['id']; // pega o ID do usuário logado
+$sql = "SELECT id, nome FROM tb_usuario";
+$resultado = mysqli_query($conexao, $sql);
+
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -53,8 +63,12 @@
     <form action="salvar_pagamento.php" method="POST">
         <h2>Registrar Pagamento</h2>
 
-        <label for="data">Data do Pagamento:</label>
-        <input type="date" name="data" id="data" required>
+<label for="data">Data do Pagamento:</label>
+<input type="datetime-local" id="data" value="<?php echo date('Y-m-d\TH:i'); ?>" disabled>
+
+<!-- Campo real que vai ser enviado -->
+<input type="hidden" name="data" value="<?php echo date('Y-m-d H:i:s'); ?>">
+
 
         <label for="forma">Forma de Pagamento:</label>
         <select name="forma" id="forma" required>
@@ -66,20 +80,22 @@
         </select>
 
         <label for="usuario_id">Usuário:</label>
-        <select name="usuario_id" id="usuario_id" required>
-            <!-- Este SELECT será preenchido dinamicamente com usuários do banco -->
-            <?php
-            include("conexao.php");
-            $sql = "SELECT id, nome FROM tb_usuario";
-            $resultado = $conexao->query($sql);
+<select name="usuario_id" id="usuario_id" required>
+<?php
+while ($linha = mysqli_fetch_assoc($resultado)) {
+    $id   = $linha['id'];
+    $nome = $linha['nome'];
 
-            while ($linha = $resultado->fetch_assoc()) {
-                echo "<option value='{$linha['id']}'>{$linha['nome']}</option>";
-            }
+    // Se for o usuário logado, deixa selecionado
+    $selected = ($id == $idUsuarioLogado) ? "selected" : "";
 
-            $conexao->close();
-            ?>
-        </select>
+    echo "<option value='$id' $selected>$nome</option>";
+}
+
+mysqli_close($conexao);
+?>
+</select>
+
 
         <input type="submit" value="Confirmar Pagamento">
     </form>
