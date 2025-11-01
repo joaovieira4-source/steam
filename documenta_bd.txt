@@ -1,0 +1,88 @@
+Explicação do Banco de Dados `mydb`
+
+1. **Schema `mydb`**
+
+   * Conjunto de tabelas e relacionamentos que compõem o banco de dados da loja de jogos.
+   * Charset definido como `utf8mb4` para suportar todos os caracteres Unicode.
+
+2. **Tabela `categoria`**
+
+   * Contém categorias de jogos (ex: Ação, RPG, Estratégia).
+   * Colunas:
+
+     * `id`: Identificador único da categoria (PK).
+     * `nome`: Nome da categoria (único).
+     * `descricao`: Descrição opcional da categoria.
+
+3. **Tabela `tb_adm`**
+
+   * Armazena administradores do sistema.
+   * Colunas:
+
+     * `id`: Identificador único do administrador (PK).
+     * `nome`: Nome do administrador (único).
+     * `email`: Email do administrador (único).
+     * `senha`: Senha do administrador.
+
+4. **Tabela `tb_usuario`**
+
+   * Contém informações dos usuários da loja.
+   * Colunas:
+
+     * `id`: Identificador único do usuário (PK).
+     * `nome`: Nome do usuário (único).
+     * `email`: Email do usuário (único).
+     * `senha`: Senha do usuário.
+
+5. **Tabela `tb_jogos`**
+
+   * Armazena os jogos disponíveis na loja.
+   * Colunas:
+
+     * `id`: Identificador do jogo (PK).
+     * `titulo`: Nome do jogo.
+     * `descricao`: Descrição detalhada.
+     * `preco`: Preço do jogo (`DECIMAL(10,2)` para valores monetários).
+     * `foto`: Caminho ou URL da imagem do jogo.
+     * `estoque`: Quantidade disponível.
+     * `plataforma`: Plataforma do jogo (PC, PS5, etc.).
+     * `categoria_id`: FK referenciando `categoria(id)`.
+     * `adm_id`: FK referenciando `tb_adm(id)` (quem cadastrou).
+   * Relacionamentos:
+
+     * Muitos jogos podem pertencer a uma categoria.
+     * Muitos jogos podem ter sido cadastrados por um administrador.
+
+6. **Tabela `pagamento`**
+
+   * Armazena pagamentos realizados pelos usuários.
+   * Colunas:
+
+     * `id`: Identificador do pagamento (PK).
+     * `forma`: Forma de pagamento (Cartão, Pix, Boleto, etc.).
+     * `data`: Data do pagamento (`DATE`).
+     * `usuario_id`: FK referenciando `tb_usuario(id)`.
+   * Relacionamentos:
+
+     * Um usuário pode ter vários pagamentos.
+
+7. **Integridade e Consistência**
+
+   * Todas as FKs garantem integridade referencial.
+   * Tipos de dados padronizados (`INT(11)` para IDs, `DECIMAL` para preço, `DATE` para datas).
+   * `ON DELETE` e `ON UPDATE` configurados para evitar inconsistências (ex: deletar um usuário remove seus pagamentos).
+
+8. **Ordem de Criação**
+
+   * Para evitar erro de FK (`errno 150`), as tabelas foram criadas nesta ordem:
+
+     1. `categoria`
+     2. `tb_adm`
+     3. `tb_usuario`
+     4. `tb_jogos`
+     5. `pagamento`
+
+9. **Resumo**
+
+   * O banco está preparado para uma loja online de jogos com usuários, administradores, categorias, jogos e pagamentos.
+   * Estrutura flexível para futura adição de tabelas como `carrinho` ou `pedidos`.

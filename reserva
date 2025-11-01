@@ -1,0 +1,38 @@
+<?php
+  require_once 'conexao.php';
+  session_start();
+  $email = $_POST['email'];
+  $senha = $_POST['senha'];
+
+  if (str_ends_with($email, '@lojaexemplo.com')) {
+    $tabela = 'tb_adm';
+    $nome = 'adm_nome';
+    $mail = 'adm_email';
+    $s = 'amd_senha';
+  } else {
+    $tabela = 'tb_usuarios';
+    $nome = 'usuarios_nome';
+    $mail = 'usuarios_email';
+    $s = 'usuarios_senha';
+  }
+  
+  $sql = "SELECT * FROM $tabela WHERE $mail = ?;";
+  $comando = mysqli_prepare($conexao, $sql);
+  mysqli_stmt_bind_param($comando, "s", $email);
+  $resultado = mysqli_execute($comando);
+  if ($resultado === False) {
+    $_SESSION['erro_email'] = "Email errado!";
+    header("Location: index.php");
+  }
+  else {
+    if (password_verify($senha, $resultado[$s]) === True) {
+      mysqli_close($conexao);
+      header("Location: pagina.php");
+    }
+    else {
+      $_SESSION['erro_senha'] = "Senha errada!";
+      header("Location: index.php");
+    }
+  }
+  
+?>

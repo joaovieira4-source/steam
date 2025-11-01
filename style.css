@@ -1,0 +1,274 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #222;
+  transition: all 0.5s ease;
+}
+body.neon {
+  background-color: #0f0f23;
+  color: #00e5ff;
+  transition: all 0.5s ease;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px 25px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+body.neon .login-container {
+    background-color: #0f0f23;
+    box-shadow: 0 0 10px #00e5ff; /* Brilho neon ao focar */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box {
+  position: relative;
+  margin-bottom: 25px;
+  width: 300px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-box input:focus {
+  border-color: #007bff;
+}
+
+.input-box label {
+  position: absolute;
+  left: 35px;
+  top: 10px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 12px;
+  color: #007bff;
+  background: white;
+  padding: 0 4px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 18px;
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.remember-forgot label input {
+  margin-right: 5px;
+}
+
+.remember-forgot a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+button[type="submit"] {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cadastrar{
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos do toggle switch */
+.toggle-container {
+  max-width: 400px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  font-weight: 600;
+  color: #222;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* =========================
+   ESTILO NEON (modo ativado)
+   ========================= */
+
+body.neon h2 {
+  color: #00e5ff;
+  text-shadow: 0
+}
+body.neon .input-box input {
+  background-color: #1a1a3a; /* Fundo mais escuro para os inputs */
+  color: #00e5ff; /* Texto azul neon */
+  border-color: #00e5ff; /* Borda azul neon */
+}
+
+body.neon .input-box input:focus {
+  box-shadow: 0 0 5px #00e5ff; /* Brilho neon ao focar */
+}
+
+body.neon .input-box label {
+  color: #00e5ff; /* Cor da label no modo neon */
+  text-shadow: 0 0 3px #00e5ff; /* Pequeno brilho na label */
+}
+
+body.neon .input-box input:focus + label,
+body.neon .input-box input:not(:placeholder-shown) + label {
+  background: #1a1a3a; /* Fundo da label quando "flutua" */
+  color: #00e5ff;
+  text-shadow: 0 0 3px #00e5ff;
+}
+
+body.neon .icon {
+  color: #00e5ff; /* Ícones azul neon */
+  text-shadow: 0 0 3px #00e5ff;
+}
+
+body.neon .remember-forgot a {
+  color: #00e5ff; /* Links azul neon */
+  text-shadow: 0 0 3px #00e5ff;
+}
+
+body.neon button[type="submit"] {
+  background-color: #00e5ff; /* Botão azul neon */
+  color: #1a1a3a; /* Texto escuro no botão */
+  box-shadow: 0 0 5px #00e5ff, 0 0 15px #00e5ff;
+}
+body.neon .cadastrar{
+  background-color: #00e5ff; /* Botão azul neon */
+  color: #1a1a3a; /* Texto escuro no botão */
+  box-shadow: 0 0 5px #00e5ff, 0 0 15px #00e5ff;
+}
+
+body.neon button[type="submit"]:hover {
+  background-color: #00c0e0; /* Tom um pouco diferente no hover */
+  box-shadow: 0 0 8px #00e5ff, 0 0 20px #00e5ff;
+}
+
+body.neon .register-link a {
+  color: #00e5ff;
+  text-shadow: 0 0 3px #00e5ff;
+}
+
+body.neon .toggle-container {
+  color: #00e5ff;
+  text-shadow: 0 0 3px #00e5ff;
+}
+
+body.neon .switch input:checked + .slider {
+  background-color: #00e5ff; /* Cor do slider quando ativado */
+  box-shadow: 0 0 5px #00e5ff;
+}
+

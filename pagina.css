@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos do toggle switch */
+.toggle-container {
+  max-width: 100%;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  font-weight: 600;
+}
+
+body.neon .toggle-container {
+  color: #00e5ff;
+  text-shadow: 3px 3px 3px #00e5ff;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #222;
+  transition: all 0.5s ease;
+}
+
+body.neon {
+  background-color: #0f0f23;
+  color: #00e5ff;
+  transition: all 0.5s ease;
+}
+
+body.neon .switch input:checked + .slider {
+  background-color: #00e5ff; /* Cor do slider quando ativado */
+  box-shadow: 0 0 5px #00e5ff;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+body {
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+/* Estilo do Cabeçalho Principal */
+.main-header {
+  background-color: #fff;
+  padding: 15px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Para o posicionamento absoluto do menu */
+  z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
+}
+
+body.neon .main-header{
+    background-color: #0f0f23;
+    box-shadow: 0 4px 10px #00e5ff;
+    transition: all 0.5s ease;
+}
+.logo {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #007bff; /* Cor principal */
+}
+
+body.neon .logo{
+    color: #00e5ff;
+}
+
+/* Estilo da Navegação do Perfil */
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0; /* Cor de fundo para o ícone */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden; /* Para garantir que a imagem de perfil seja cortada em círculo */
+  border: 2px solid #007bff; /* Borda para destaque */
+  transition: all 0.3s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+.profile-picture ion-icon {
+  font-size: 2.2em; /* Tamanho do ícone */
+  color: #555;
+}
+
+body.neon .profile-picture ion-icon{
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilo do Menu Suspenso do Perfil */
+.profile-menu {
+  position: absolute;
+  top: 60px; /* Ajuste para ficar abaixo da foto de perfil */
+  right: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  min-width: 200px;
+  opacity: 0; /* Começa invisível */
+  visibility: hidden; /* Esconde completamente */
+  transform: translateY(-10px); /* Começa um pouco acima */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.profile-menu.active {
+  opacity: 1; /* Torna visível */
+  visibility: visible; /* Mostra */
+  transform: translateY(0); /* Posição final */
+}
+
+body.neon .porfile-menu {
+    background-color: black;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1em;
+  border-bottom: 1px solid #eee; /* Separador entre itens */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body.neon .menu-item{
+    background-color: black;
+    color: #007bff;
+}
+
+.menu-item:last-child {
+  border-bottom: none; /* Remove a borda do último item */
+}
+
+.menu-item:hover {
+  background-color: #f0f2f5;
+  color: #007bff;
+}
+body.neon .menu-item:hover {
+  background-color: black;
+  color: #00e5ff;
+}
+
+.menu-item ion-icon {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.menu-item.delete-account {
+  color: #dc3545; /* Cor vermelha para exclusão */
+}
+
+body.neon .menu-item.delete-account {
+    color: #dc3545;
+  }
+  
+body.neon .menu-item.delete-account:hover {
+  color: #ff3903;
+    text-shadow: 2px 2px 2px #ff3903;
+  }
+  .menu-item.delete-account:hover {
+    background-color: #ffebeb; /* Fundo vermelho claro no hover */
+  color: #dc3545;
+}
+
+.menu-item.logout {
+  color: #333; /* Cor cinza para logout */
+}
+
+.menu-item.logout:hover {
+  background-color: #e9ecef; /* Fundo cinza claro no hover */
+  color: #6c757d;
+}
+
+
+/* Estilo do Conteúdo Principal */
+.content {
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+
+
+body.neon #toggleLabel{
+    color: #00e5ff;
+    text-shadow: 3px 3px 4px #00e5ff;
+    transition: background-color 0.3s ease;
+}
+#toggleLabel {
+    font-weight: 500;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.nome_do_usuario{
+  margin-right: 20px;
+}
+
+.profile-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
