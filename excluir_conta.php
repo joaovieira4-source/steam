@@ -3,7 +3,20 @@ require_once "conexao.php"; // Assume-se que $conexao está OK
 
 $id= $_GET['id'];
 
-$sql = "DELETE FROM tb_usuario WHERE id_usuarios = ? ";
+// Decide tabela e colunas
+if (str_ends_with($email, '@lojaexemplo.com')) {
+    $tabela = 'tb_adm';
+    $nome_col = 'nome';
+    $email_col = 'email';
+    $senha_col = 'senha';
+} else {
+    $tabela = 'tb_usuario';
+    $nome_col = 'nome';
+    $email_col = 'email';
+    $senha_col = 'senha';
+}
+
+$sql = "DELETE FROM $tabela WHERE id = ? ";
 
 $comando = mysqli_prepare($conexao, $sql);
 
