@@ -9,14 +9,14 @@ $senha = $_POST['senha'];
 // Decide a tabela e os nomes das colunas
 if (str_ends_with($email, '@lojaexemplo.com')) {
     $tabela = 'tb_adm';
-    $col_nome = 'adm_nome';
-    $col_email = 'adm_email';
-    $col_senha = 'amd_senha'; // verifique se este campo está correto no DB
+    $col_nome = 'nome';
+    $col_email = 'email';
+    $col_senha = 'senha';
 } else {
     $tabela = 'tb_usuario';
-    $col_nome = 'usuarios_nome';
-    $col_email = 'usuarios_email';
-    $col_senha = 'usuarios_senha';
+    $col_nome = 'nome';
+    $col_email = 'email';
+    $col_senha = 'senha';
 }
 
 // Prepara a query
@@ -46,12 +46,13 @@ mysqli_stmt_fetch($comando);
 
 // Verifica a senha
 if (password_verify($senha, $hash_senha)) {
-    $_SESSION['nome_do_usuario'] = $nome_usuario;
+    $_SESSION['nome_usuario'] = $nome_usuario;
+    $_SESSION['email'] = $email;
     mysqli_close($conexao);
     header("Location: pagina.php");
     exit;
 } else {
-    $_SESSION['erro_senha'] = "Senha incorreta!";
+    $_SESSION['erro'] = "Senha incorreta!";
     header("Location: index.php");
     exit;
 }

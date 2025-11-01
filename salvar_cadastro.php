@@ -10,39 +10,40 @@ $csenha = $_POST['csenha'];
 
 // Valida campo usuário
 if ($usuario === '') {
-    $_SESSION['erro'] = "O campo não pode conter apenas espaços em branco.";
+    $_SESSION['erro'] = "O campo de usuário não pode estar vazio ou conter apenas espaços.";
     header("Location: registro.php");
     exit;
 }
 
 // Valida senhas
 if ($senha !== $csenha) {
-    $_SESSION['erro'] = "Senha errada! Por favor, certifique que a senha seja igual.";
+    $_SESSION['erro'] = "As senhas não coincidem. Por favor, verifique.";
     header("Location: registro.php");
     exit;
 }
 
 // Decide tabela e colunas
-if (str_ends_with( $email, '@lojaexemplo.com')) {
+if (str_ends_with($email, '@lojaexemplo.com')) {
     $tabela = 'tb_adm';
-    $nome_col = 'adm_nome';
-    $email_col = 'adm_email';
-    $senha_col = 'amd_senha'; // conferir se é "amd_senha" mesmo
+    $nome_col = 'nome';
+    $email_col = 'email';
+    $senha_col = 'senha';
 } else {
     $tabela = 'tb_usuario';
-    $nome_col = 'usuarios_nome';
-    $email_col = 'usuarios_email';
-    $senha_col = 'usuarios_senha';
+    $nome_col = 'nome';
+    $email_col = 'email';
+    $senha_col = 'senha';
 }
 
-// Verifica se o email já existe
+// Verifica se o email ou usuário já existe
 $sql_check = "SELECT 1 FROM $tabela WHERE $nome_col = ? OR $email_col = ?";
 $comando_check = mysqli_prepare($conexao, $sql_check);
-mysqli_stmt_bind_param($comando_check, "ss", $usuario, $email);mysqli_stmt_execute($comando_check);
+mysqli_stmt_bind_param($comando_check, "ss", $usuario, $email);
+mysqli_stmt_execute($comando_check);
 mysqli_stmt_store_result($comando_check);
 
 if (mysqli_stmt_num_rows($comando_check) > 0) {
-    $_SESSION['erro'] = "Este e-mail já está registrado!";
+    $_SESSION['erro'] = "Este usuário ou e-mail já está registrado!";
     header("Location: registro.php");
     exit;
 }
