@@ -136,8 +136,51 @@ mysqli_close($conexao);
             ?>
         </div>
     </main>
-
     <script src="script.js"></script>
 </body>
 
 </html>
+<?php
+$SQL="SELECT * FROM tb_jogos WHERE categoria ";
+
+$comandoCategoria = mysqli_prepare($conexao, $sqlJogos);
+
+mysqli_stmt_execute($comandoCategoria);
+
+$resultadosJogos = mysqli_stmt_get_result($comandoCategoria);
+
+$resultado = mysqli_stmt_get_result($comandoCategoria);
+
+$resposta = mysqli_fetch_assoc($resultado);
+
+ while ($jogo = mysqli_fetch_assoc($resultadosJogos)) {
+                $idJogo        = $jogo['id'];
+                $tituloJogo    = htmlspecialchars($jogo['titulo']);
+                $descricaoJogo = htmlspecialchars($jogo['descricao']);
+                $precoJogo     = htmlspecialchars($jogo['preco']);
+                $fotoJogo      = htmlspecialchars($jogo['foto']);
+                $categoriaJogo = htmlspecialchars($jogo['categoria'] ?? 'Não especificada');
+
+                echo "<div class='jogo-item'>
+            <img src='fotos/$fotoJogo' alt='$tituloJogo'>
+            <h3>$tituloJogo</h3>
+            <p>Categoria: $categoriaJogo</p>
+            <p>Preço: $precoJogo</p>
+            <form action='salvarUsuarioJogos.php' method='post'>
+                <input type='hidden' name='idusuario' value='$idUsuario'>
+                <input type='hidden' name='idjogo' value='$idJogo'>
+                <input type='hidden' name='data' value='" . date("Y-m-d") . "'>
+                <button type='submit'>Comprar</button>
+            </form>
+          </div>";
+            }
+
+echo "<form action='jogos.php'>";
+echo "<select name='teste'>";
+echo "<option value='$id'> </option>";
+echo "</select>";
+echo "</form>";
+
+
+
+?>
