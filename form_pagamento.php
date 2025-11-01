@@ -50,7 +50,7 @@
 </head>
 <body>
 
-    <form action="salvar_compra.php" method="POST">
+    <form action="salvar_pagamento.php" method="POST">
         <h2>Registrar Pagamento</h2>
 
         <label for="data">Data do Pagamento:</label>
