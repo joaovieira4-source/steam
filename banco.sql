@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`categoria` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `nome` (`nome` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -43,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tb_usuario` (
   UNIQUE INDEX `nome` (`nome` ASC) VISIBLE,
   UNIQUE INDEX `email` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -63,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`pagamento` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -79,7 +76,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tb_adm` (
   UNIQUE INDEX `nome` (`nome` ASC) VISIBLE,
   UNIQUE INDEX `email` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -109,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tb_jogos` (
     REFERENCES `mydb`.`categoria` (`id`)
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 

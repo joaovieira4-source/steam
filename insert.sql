@@ -1,89 +1,58 @@
-use mydb;
 
--- =====================================================
--- 3️⃣ INSERTS (na ordem correta)
--- =====================================================
+USE mydb;
 
--- 🧩 Categoria
 INSERT INTO categoria (nome, descricao) VALUES
-('Ação', 'Jogos com muita adrenalina e combate'),
-('Aventura', 'Jogos com foco em exploração e história'),
-('RPG', 'Jogos de interpretação e evolução de personagens'),
-('Esportes', 'Jogos de futebol, basquete, etc.'),
-('Corrida', 'Corridas de carros e motos'),
-('Simulação', 'Simula a vida real ou profissões'),
-('Estratégia', 'Planejamento e tática em tempo real'),
-('Terror', 'Jogos assustadores e de sobrevivência'),
-('Puzzle', 'Jogos de lógica e quebra-cabeça'),
-('Plataforma', 'Jogos com foco em saltos e desafios');
-
--- 👤 Usuários
+('Ação', 'Jogos de ação e combate'),
+('Aventura', 'Jogos de exploração e narrativa'),
+('RPG', 'Jogos de interpretação de personagens'),
+('Esportes', 'Jogos esportivos'),
+('Corrida', 'Jogos de corrida'),
+('Simulação', 'Jogos simuladores'),
+('Estratégia', 'Jogos estratégicos'),
+('Terror', 'Jogos com temática de horror'),
+('Puzzle', 'Jogos de quebra-cabeça'),
+('Plataforma', 'Jogos de plataforma');
 INSERT INTO tb_usuario (nome, email, senha) VALUES
-('João Lucas', 'joao@exemplo.com', 'senha123'),
-('Maria Silva', 'maria@exemplo.com', 'senha456'),
-('Carlos Souza', 'carlos@exemplo.com', 'senha789'),
-('Ana Paula', 'ana@exemplo.com', 'senha321'),
-('Rafael Lima', 'rafael@exemplo.com', 'senha654'),
-('Fernanda Alves', 'fernanda@exemplo.com', 'senha987'),
-('Pedro Gomes', 'pedro@exemplo.com', 'senha159'),
-('Juliana Rocha', 'juliana@exemplo.com', 'senha753'),
-('Bruno Costa', 'bruno@exemplo.com', 'senha852'),
-('Larissa Melo', 'larissa@exemplo.com', 'senha951');
-
--- 👨‍💼 Administradores
+('Joao Silva', 'joao@email.com', '123'),
+('Maria Souza', 'maria@email.com', '123'),
+('Carlos Lima', 'carlos@email.com', '123'),
+('Ana Santos', 'ana@email.com', '123'),
+('Lucas Rocha', 'lucas@email.com', '123'),
+('Julia Alves', 'julia@email.com', '123'),
+('Roberto Dias', 'roberto@email.com', '123'),
+('Fernanda Costa', 'fernanda@email.com', '123'),
+('Diego Ramos', 'diego@email.com', '123'),
+('Beatriz Melo', 'beatriz@email.com', '123');
 INSERT INTO tb_adm (nome, email, senha) VALUES
-('Administrador 1', 'adm1@loja.com', 'adm001'),
-('Administrador 2', 'adm2@loja.com', 'adm002'),
-('Administrador 3', 'adm3@loja.com', 'adm003'),
-('Administrador 4', 'adm4@loja.com', 'adm004'),
-('Administrador 5', 'adm5@loja.com', 'adm005'),
-('Administrador 6', 'adm6@loja.com', 'adm006'),
-('Administrador 7', 'adm7@loja.com', 'adm007'),
-('Administrador 8', 'adm8@loja.com', 'adm008'),
-('Administrador 9', 'adm9@loja.com', 'adm009'),
-('Administrador 10', 'adm10@loja.com', 'adm010');
-
--- 🎮 Jogos
+('Admin1', 'adm1@loja.com', '123'),
+('Admin2', 'adm2@loja.com', '123'),
+('Admin3', 'adm3@loja.com', '123'),
+('Admin4', 'adm4@loja.com', '123'),
+('Admin5', 'adm5@loja.com', '123'),
+('Admin6', 'adm6@loja.com', '123'),
+('Admin7', 'adm7@loja.com', '123'),
+('Admin8', 'adm8@loja.com', '123'),
+('Admin9', 'adm9@loja.com', '123'),
+('Admin10', 'adm10@loja.com', '123');
 INSERT INTO tb_jogos (titulo, descricao, preco, foto, estoque, plataforma, categoria_id, adm_id) VALUES
-('God of War', 'Ação épica com Kratos em combate intenso', 199.90, 'godofwar.jpg', 50, 'PlayStation', 1, 1),
-('The Witcher 3', 'RPG de mundo aberto com Geralt de Rívia', 149.90, 'witcher3.jpg', 40, 'PC', 3, 2),
-('FIFA 25', 'Jogo de futebol realista da EA Sports', 299.90, 'fifa25.jpg', 80, 'Xbox', 4, 3),
-('Forza Horizon 6', 'Corridas em mundo aberto e gráficos incríveis', 249.90, 'forza6.jpg', 60, 'Xbox', 5, 4),
-('Minecraft', 'Construa e explore mundos infinitos em blocos', 89.90, 'minecraft.jpg', 200, 'PC', 6, 5),
-('Resident Evil 9', 'Sobrevivência e terror com zumbis', 279.90, 're9.jpg', 35, 'PlayStation', 8, 6),
-('Age of Empires IV', 'Estratégia em tempo real histórica', 159.90, 'aoe4.jpg', 70, 'PC', 7, 7),
-('Celeste', 'Plataforma desafiadora com bela trilha sonora', 59.90, 'celeste.jpg', 120, 'Switch', 10, 8),
-('Tetris Effect', 'Versão moderna do clássico puzzle', 49.90, 'tetris.jpg', 100, 'PC', 9, 9),
-('Horizon Forbidden West', 'Aventura com Aloy em um mundo futurista', 299.90, 'horizon.jpg', 45, 'PlayStation', 2, 10);
-
--- 💳 Pagamentos
-INSERT INTO pagamento (forma, data, usuario_id) VALUES
-('Cartão de Crédito', '2025-10-01', 1),
-('Pix', '2025-10-02', 2),
-('Boleto', '2025-10-03', 3),
-('Cartão de Débito', '2025-10-04', 4),
-('Pix', '2025-10-05', 5),
-('Transferência', '2025-10-06', 6),
-('Cartão de Crédito', '2025-10-07', 7),
-('Pix', '2025-10-08', 8),
-('Boleto', '2025-10-09', 9),
-('Cartão de Débito', '2025-10-10', 10);
-
-
-INSERT INTO tb_usuario_jogos (usuario_id, jogo_id, data_compra) VALUES
-(1, 1, '2025-01-10 15:23:00'),
-(1, 3, '2025-01-11 18:52:10'),
-(2, 2, '2025-01-09 10:11:45'),
-(2, 4, '2025-01-12 21:17:30'),
-(3, 1, '2025-01-10 09:44:55'),
-(3, 2, '2025-01-14 13:55:12'),
-(1, 4, '2025-01-15 12:12:50'),
-(4, 5, '2025-01-16 14:30:00'),
-(5, 6, '2025-01-17 16:45:20'),
-(6, 7, '2025-01-18 11:22:33'),
-(7, 8, '2025-01-19 09:15:40'),
-(8, 9, '2025-01-20 17:05:12'),
-(9, 10, '2025-01-21 13:40:55'),
-(10, 1, '2025-01-22 19:25:30'),
-(4, 7, '2025-01-23 10:50:15'),
-(5, 8, '2025-01-24 15:35:48');
+('God of War', 'Ação com Kratos', 199.90, 'god.jpg', 50, 'PlayStation', 1, 1),
+('Zelda TOTK', 'Aventura em mundo aberto', 349.90, 'zelda.jpg', 80, 'Switch', 2, 2),
+('The Witcher 3', 'RPG do bruxo Geralt', 149.90, 'witcher.jpg', 100, 'PC', 3, 3),
+('FIFA 24', 'Simulação de futebol', 299.90, 'fifa.jpg', 200, 'Xbox', 4, 4),
+('Forza Horizon 5', 'Corrida em mundo aberto', 249.90, 'forza.jpg', 120, 'Xbox', 5, 5),
+('The Sims 4', 'Simulação de vida', 99.90, 'sims.jpg', 150, 'PC', 6, 6),
+('Age of Empires IV', 'Estratégia histórica', 159.90, 'aoe4.jpg', 90, 'PC', 7, 7),
+('Resident Evil Village', 'Terror e sobrevivência', 199.90, 're8.jpg', 60, 'PlayStation', 8, 8),
+('Tetris Effect', 'Puzzle clássico moderno', 49.90, 'tetris.jpg', 300, 'PC', 9, 9),
+('Celeste', 'Plataforma indie', 59.90, 'celeste.jpg', 110, 'Switch', 9, 10);
+INSERT INTO tb_usuario_jogos (usuario_id, jogo_id) VALUES
+(1, 1),
+(1, 3),
+(2, 2),
+(3, 4),
+(4, 5),
+(5, 6),
+(6, 8),
+(7, 7),
+(8, 9),
+(9, 10);
