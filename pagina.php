@@ -37,7 +37,11 @@ $comandoJogos = mysqli_prepare($conexao, $sqlJogos);
 mysqli_stmt_execute($comandoJogos);
 $resultadosJogos = mysqli_stmt_get_result($comandoJogos);
 
-mysqli_close($conexao);
+// Buscar todas as categorias
+$sqlCat = "SELECT id, nome FROM categoria ORDER BY nome ASC";
+$stmtCat = mysqli_prepare($conexao, $sqlCat);
+mysqli_stmt_execute($stmtCat);
+$resultadoCat = mysqli_stmt_get_result($stmtCat);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +56,6 @@ mysqli_close($conexao);
 </head>
 
 <body>
-
     <!-- Header / Menu de perfil -->
     <header class="main-header">
         <h1 class="logo">Play Zone</h1>
@@ -63,8 +66,28 @@ mysqli_close($conexao);
                     <img src="perfil.jpg" alt="Perfil">
                 </ion-icon>
             </div>
+
+            <!-- Barra de Pesquisa de Categorias -->
+            <div class="search-bar">
+                <form action="buscar_jogos.php" method="GET">
+                    <label for="categoria">Pesquisar por Categoria:</label>
+                    <select name="categoria_id" id="categoria" required>
+                        <option value="">Selecione...</option>
+                        <?php
+                        while ($categoria = mysqli_fetch_assoc($resultadoCat)) {
+                            $idCat = $categoria['id'];
+                            $nomeCat = htmlspecialchars($categoria['nome']);
+                            echo "<option value='$idCat'>$nomeCat</option>";
+                        }
+                        ?>
+                    </select>
+                    <button type="submit">Pesquisar</button>
+                </form>
+            </div>
+
+            <!-- Menu de Perfil -->
             <div class="profile-menu" id="profileMenu">
-                <a href="jogos.php?id=<?php echo $idUsuario;?>" class="menu-item">
+                <a href="jogos.php?id=<?php echo $idUsuario; ?>" class="menu-item">
                     <ion-icon name="cart-outline"></ion-icon> Meus Jogos
                 </a>
                 <a href="#" class="menu-item">
@@ -79,6 +102,7 @@ mysqli_close($conexao);
             </div>
         </nav>
     </header>
+
 
     <!-- Toggle de modo -->
     <div class="toggle-container" style="justify-items: end;">
@@ -140,47 +164,3 @@ mysqli_close($conexao);
 </body>
 
 </html>
-<?php
-$SQL="SELECT * FROM tb_jogos WHERE categoria ";
-
-$comandoCategoria = mysqli_prepare($conexao, $sqlJogos);
-
-mysqli_stmt_execute($comandoCategoria);
-
-$resultadosJogos = mysqli_stmt_get_result($comandoCategoria);
-
-$resultado = mysqli_stmt_get_result($comandoCategoria);
-
-$resposta = mysqli_fetch_assoc($resultado);
-
- while ($jogo = mysqli_fetch_assoc($resultadosJogos)) {
-                $idJogo        = $jogo['id'];
-                $tituloJogo    = htmlspecialchars($jogo['titulo']);
-                $descricaoJogo = htmlspecialchars($jogo['descricao']);
-                $precoJogo     = htmlspecialchars($jogo['preco']);
-                $fotoJogo      = htmlspecialchars($jogo['foto']);
-                $categoriaJogo = htmlspecialchars($jogo['categoria'] ?? 'Não especificada');
-
-                echo "<div class='jogo-item'>
-            <img src='fotos/$fotoJogo' alt='$tituloJogo'>
-            <h3>$tituloJogo</h3>
-            <p>Categoria: $categoriaJogo</p>
-            <p>Preço: $precoJogo</p>
-            <form action='salvarUsuarioJogos.php' method='post'>
-                <input type='hidden' name='idusuario' value='$idUsuario'>
-                <input type='hidden' name='idjogo' value='$idJogo'>
-                <input type='hidden' name='data' value='" . date("Y-m-d") . "'>
-                <button type='submit'>Comprar</button>
-            </form>
-          </div>";
-            }
-
-echo "<form action='jogos.php'>";
-echo "<select name='teste'>";
-echo "<option value='$id'> </option>";
-echo "</select>";
-echo "</form>";
-
-
-
-?>
