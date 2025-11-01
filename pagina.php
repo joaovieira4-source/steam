@@ -125,6 +125,9 @@ mysqli_close($conexao);
                 echo "<h3>" . htmlspecialchars($tituloJogo) . "</h3>";
                 echo "<p>Categoria: " . htmlspecialchars($categoriaJogo) . "</p>";
                 echo "<p>Preço: " . htmlspecialchars($precoJogo) . "</p>";
+                echo "<a href='form_pagamento.php'>
+                <button>Comprar</button>
+                </a>";
                 echo "</div>";
             }
             ?>
