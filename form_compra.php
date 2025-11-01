@@ -2,29 +2,87 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Pagamento</title>
+    <title>Registrar Pagamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+            border: none;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Forma de Pagamento</h2>
-<form action="salvar_compra.php" method="POST"> 
-    <h2>Data do Pagamento</h2>
-    <input type="date" name="data" required>
+    <form action="salvar_compra.php" method="POST">
+        <h2>Registrar Pagamento</h2>
 
-    <h2>Valor da Compra</h2>
-    <input type="number" name="valor" step="0.01" placeholder="Valor Total" required>
+        <label for="data">Data do Pagamento:</label>
+        <input type="date" name="data" id="data" required>
 
-    <h2>Selecione a Forma de Pagamento</h2>
-    <select name="pagamento" required>
-        <option value="">Selecione...</option>
-        <option value="pix">Pix</option>
-        <option value="credito">Cartão de Crédito</option>
-        <option value="debito">Cartão de Débito</option>
-        <option value="boleto">Boleto Bancário</option>
-    </select>
+        <label for="forma">Forma de Pagamento:</label>
+        <select name="forma" id="forma" required>
+            <option value="">Selecione...</option>
+            <option value="Pix">Pix</option>
+            <option value="Crédito">Cartão de Crédito</option>
+            <option value="Débito">Cartão de Débito</option>
+            <option value="Boleto">Boleto Bancário</option>
+        </select>
 
-    <input type="submit" value="Confirmar Compra">
-</form>
+        <label for="usuario_id">Usuário:</label>
+        <select name="usuario_id" id="usuario_id" required>
+            <!-- Este SELECT será preenchido dinamicamente com usuários do banco -->
+            <?php
+            include("conexao.php");
+            $sql = "SELECT id, nome FROM tb_usuario";
+            $resultado = $conexao->query($sql);
+
+            while ($linha = $resultado->fetch_assoc()) {
+                echo "<option value='{$linha['id']}'>{$linha['nome']}</option>";
+            }
+
+            $conexao->close();
+            ?>
+        </select>
+
+        <input type="submit" value="Confirmar Pagamento">
+    </form>
 
 </body>
 </html>
