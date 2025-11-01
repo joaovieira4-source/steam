@@ -107,6 +107,15 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tb_jogos` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+CREATE TABLE tb_usuario_jogos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    jogo_id INT NOT NULL,
+    data_compra DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES tb_usuario(id),
+    FOREIGN KEY (jogo_id) REFERENCES tb_jogos(id)
+);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
