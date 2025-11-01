@@ -32,7 +32,22 @@ $_SESSION['nome_usuario'] = $nomeUsuario;
 $_SESSION['email'] = $emailUsuario;
 
 // Busca todos os jogos
-$sqlJogos = "SELECT * FROM tb_jogos";
+$sqlJogos = "SELECT 
+    j.id,
+    j.titulo,
+    j.descricao,
+    j.preco,
+    j.foto,
+    j.estoque,
+    j.plataforma,
+    c.nome AS categoria
+FROM 
+    tb_jogos AS j
+INNER JOIN 
+    categoria AS c
+ON 
+    j.categoria_id = c.id;
+";
 $comandoJogos = mysqli_prepare($conexao, $sqlJogos);
 mysqli_stmt_execute($comandoJogos);
 $resultadosJogos = mysqli_stmt_get_result($comandoJogos);
@@ -156,6 +171,7 @@ $resultadoCat = mysqli_stmt_get_result($stmtCat);
             </form>
           </div>";
             }
+
             ?>
         </div>
     </main>
