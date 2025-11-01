@@ -92,14 +92,25 @@ mysqli_close($conexao);
     <p>Aqui você pode exibir informações do usuário, posts, etc.</p>
 
     <!-- Links para cadastro e listagem -->
-    <div class="links-crud">
-      <a href="form_jogos.php">Adicionar Jogo</a><br>
-      <a href="form_categoria.php">Adicionar Categoria</a><br>
-      <a href="listagemcrud.php">Listagem Geral</a><br>
-      <a href="form_pagamento.php">
-        <button>Comprar</button>
-      </a>
-    </div>
+    <? if($tabela === "tb_adm"){
+      echo '<div class="links-crud">
+        <a href="form_jogos.php">Adicionar Jogo</a><br>
+        <a href="form_categoria.php">Adicionar Categoria</a><br>
+        <a href="listagemcrud.php">Listagem Geral</a><br>
+        <a href="form_pagamento.php">
+          <button>Comprar</button>
+        </a>
+      </div>';
+      
+    }else{
+            echo '<div class="links-crud">
+        <a href="listagemcrud.php">Listagem Geral</a><br>
+        <a href="form_pagamento.php">
+          <button>Comprar</button>
+        </a>
+      </div>';
+    }
+      ?>
   </main>
 
   <script src="script.js"></script>
