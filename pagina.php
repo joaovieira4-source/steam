@@ -51,7 +51,7 @@ $resultadoCat = mysqli_stmt_get_result($stmtCat);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Perfil</title>
-    <link rel="stylesheet" href="pagina.css">
+    <link rel="stylesheet" href="premium.css">
     <link href="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.css" rel="stylesheet">
 </head>
 
@@ -127,8 +127,7 @@ $resultadoCat = mysqli_stmt_get_result($stmtCat);
                 echo '<a href="form_categoria.php">Adicionar Categoria</a><br>';
                 echo '<a href="listagemcrud.php">Listagem Geral</a><br>';
             } else {
-                echo '<a href="listagemcrud.php">Listagem Geral</a><br>';
-                echo '<a href="form_pagamento.php"><button>Comprar</button></a>';
+
             }
             ?>
         </div>

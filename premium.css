@@ -1,0 +1,353 @@
+/* -------- RESET -------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* -------- BASE -------- */
+body {
+    background: linear-gradient(145deg, #0f0f10, #1c1c1f);
+    color: #f2f2f2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------- HEADER -------- */
+.main-header {
+    background: rgba(20, 20, 25, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00b4ff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px #00b4ff;
+}
+
+.profile-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nome_do_usuario {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffffcc;
+}
+
+.profile-picture {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #00b4ff;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00b4ff;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* -------- SEARCH BAR -------- */
+.search-bar {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: 0.3s;
+}
+
+.search-bar:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.search-bar label {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.search-bar select {
+    padding: 0.4rem 0.6rem;
+    border: none;
+    border-radius: 6px;
+    background: #242428;
+    color: #fff;
+    font-weight: 500;
+    outline: none;
+}
+
+.search-bar button {
+    background: #00b4ff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.search-bar button:hover {
+    background: #0098d6;
+    transform: scale(1.05);
+}
+
+/* -------- PROFILE MENU -------- */
+.profile-menu {
+    position: absolute;
+    top: 75px;
+    right: 3rem;
+    background: #1a1a1d;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    display: none;
+    flex-direction: column;
+    min-width: 220px;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.profile-menu.active {
+    display: flex;
+}
+
+.menu-item {
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: #ccc;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.menu-item:hover {
+    background: #00b4ff;
+    color: #fff;
+}
+
+.menu-item ion-icon {
+    font-size: 1.2rem;
+}
+
+.delete-account {
+    color: #ff5555;
+}
+
+.delete-account:hover {
+    background: #ff5555;
+    color: #fff;
+}
+
+.logout {
+    border-top: 1px solid #333;
+}
+
+/* -------- TOGGLE MODE -------- */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem 3rem;
+    gap: 0.5rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #333;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00b4ff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* -------- MAIN CONTENT -------- */
+.content {
+    flex: 1;
+    padding: 2rem 3rem;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.content h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #00b4ff;
+}
+
+.content p {
+    color: #b5b5b5;
+    margin-bottom: 0.5rem;
+}
+
+/* -------- LINKS CRUD -------- */
+.links-crud {
+    margin: 2rem 0;
+}
+
+.links-crud a,
+.links-crud button {
+    background: #00b4ff;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    margin: 0.4rem;
+}
+
+.links-crud a:hover,
+.links-crud button:hover {
+    background: #008ccc;
+    transform: scale(1.05);
+}
+
+/* -------- JOGOS LISTA -------- */
+.jogos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.jogo-item {
+    background: #1a1a1d;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.jogo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #00b4ff55;
+}
+
+.jogo-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.jogo-item h3 {
+    margin: 0.8rem 0 0.3rem;
+    color: #00b4ff;
+    font-size: 1.1rem;
+}
+
+.jogo-item p {
+    color: #bbb;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.jogo-item button {
+    background: #00b4ff;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.jogo-item button:hover {
+    background: #008ccc;
+    transform: scale(1.05);
+}
+
+/* -------- ANIMAÇÕES -------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------- RESPONSIVIDADE -------- */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.2rem;
+    }
+
+    .profile-nav {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 0.8rem;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .toggle-container {
+        padding: 1rem;
+    }
+}
