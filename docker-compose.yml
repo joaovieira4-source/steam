@@ -15,7 +15,7 @@ services:
     restart: always
     volumes:
       - ./banco.sql:/docker-entrypoint-initdb.d/banco.sql
-      - ./inserts.sql:/docker-entrypoint-initdb.d/inserts.sql
+      - ./Inserts.sql:/docker-entrypoint-initdb.d/Inserts.sql
     environment:
       - MARIADB_USER=root
       - MARIADB_ROOT_PASSWORD=123
