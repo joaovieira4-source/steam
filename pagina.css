@@ -275,3 +275,59 @@ body.neon #toggleLabel{
   display: flex;
   align-items: center;
 }
+
+
+/* Container da lista de jogos */
+.jogos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Cada card de jogo */
+.jogo-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito hover */
+.jogo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Imagem do jogo */
+.jogo-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Título do jogo */
+.jogo-item h3 {
+    font-size: 1.2em;
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Categoria e preço */
+.jogo-item p {
+    margin: 3px 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Preço destacado */
+.jogo-item p:last-child {
+    font-weight: bold;
+    color: #007BFF;
+    font-size: 1em;
+}

@@ -1,18 +1,18 @@
-- verificar se e adm ou cliente 
-- limitar os formulários para somente adms 
+<!-- - verificar se e adm ou cliente 
+- limitar os formulários para somente adms  -->
 <!-- - excluir conta -->
 <!-- - editar senha -->
 - carrinho
-- dashbord na página inicial com a função de compra
+<!-- - dashbord na página inicial com a função de compra
 - listagem por categoria
 - listagem para o adm com crud completo 
-- ta dando erro na hora de salvar a coluna categoria em tb_jogos
+- ta dando erro na hora de salvar a coluna categoria em tb_jogos -->
  
- problemas no banco 
+ <!-- problemas no banco 
  <!-- -problemas na definição de dados V -->
- -não ta salvado foto no banco
+ <!-- -não ta salvado foto no banco --> -->
 
-- todas as fotos vao ser salvar no banco pela foto
+<!-- - todas as fotos vao ser salvar no banco pela foto -->
 
 
 feitos

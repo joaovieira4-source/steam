@@ -102,7 +102,6 @@ mysqli_close($conexao);
                 echo '<a href="form_jogos.php">Adicionar Jogo</a><br>';
                 echo '<a href="form_categoria.php">Adicionar Categoria</a><br>';
                 echo '<a href="listagemcrud.php">Listagem Geral</a><br>';
-                echo '<a href="form_pagamento.php"><button>Comprar</button></a>';
             } else {
                 echo '<a href="listagemcrud.php">Listagem Geral</a><br>';
                 echo '<a href="form_pagamento.php"><button>Comprar</button></a>';
