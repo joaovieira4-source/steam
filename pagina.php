@@ -114,25 +114,27 @@ mysqli_close($conexao);
             <?php
             while ($jogo = mysqli_fetch_assoc($resultadosJogos)) {
                 $idJogo        = $jogo['id'];
-                $tituloJogo    = $jogo['titulo'];
-                $descricaoJogo = $jogo['descricao'];
-                $precoJogo     = $jogo['preco'];
-                $fotoJogo      = $jogo['foto'];
-                $categoriaJogo = $jogo['categoria'] ?? 'Não especificada';
+                $tituloJogo    = htmlspecialchars($jogo['titulo']);
+                $descricaoJogo = htmlspecialchars($jogo['descricao']);
+                $precoJogo     = htmlspecialchars($jogo['preco']);
+                $fotoJogo      = htmlspecialchars($jogo['foto']);
+                $categoriaJogo = htmlspecialchars($jogo['categoria'] ?? 'Não especificada');
 
-                echo "<div class='jogo-item'>";
-                echo "<img src='fotos/$fotoJogo' alt='" . htmlspecialchars($tituloJogo) . "'>";
-                echo "<h3>" . htmlspecialchars($tituloJogo) . "</h3>";
-                echo "<p>Categoria: " . htmlspecialchars($categoriaJogo) . "</p>";
-                echo "<p>Preço: " . htmlspecialchars($precoJogo) . "</p>";
-                echo "<a href='form_pagamento.php'>
-                <button>Comprar</button>
-                </a>";
-                echo "</div>";
+                echo "<div class='jogo-item'>
+            <img src='fotos/$fotoJogo' alt='$tituloJogo'>
+            <h3>$tituloJogo</h3>
+            <p>Categoria: $categoriaJogo</p>
+            <p>Preço: $precoJogo</p>
+            <form action='salvarUsuarioJogos.php' method='post'>
+                <input type='hidden' name='idusuario' value='$idUsuario'>
+                <input type='hidden' name='idjogo' value='$idJogo'>
+                <input type='hidden' name='data' value='" . date("Y-m-d") . "'>
+                <button type='submit'>Comprar</button>
+            </form>
+          </div>";
             }
             ?>
         </div>
-
     </main>
 
     <script src="script.js"></script>
