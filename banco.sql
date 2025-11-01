@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`pagamento` (
   CONSTRAINT `fk_pagamento_usuario`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `mydb`.`tb_usuario` (`id`)
-    ON DELETE CASCADE
+    ON DELETE CASCADE    
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`tb_jogos` (
   CONSTRAINT `fk_jogo_adm`
     FOREIGN KEY (`adm_id`)
     REFERENCES `mydb`.`tb_adm` (`id`)
-    ON DELETE SET NULL
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_jogo_categoria`
     FOREIGN KEY (`categoria_id`)

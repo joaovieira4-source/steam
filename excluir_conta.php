@@ -1,28 +1,42 @@
 <?php
-require_once "conexao.php"; // Assume-se que $conexao está OK
+session_start();
+require_once "conexao.php";
 
-$id= $_GET['id'];
-
-// Decide tabela e colunas
-if (str_ends_with($email, '@lojaexemplo.com')) {
-    $tabela = 'tb_adm';
-    $nome_col = 'nome';
-    $email_col = 'email';
-    $senha_col = 'senha';
-} else {
-    $tabela = 'tb_usuario';
-    $nome_col = 'nome';
-    $email_col = 'email';
-    $senha_col = 'senha';
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    die("ID não informado.");
 }
 
-$sql = "DELETE FROM $tabela WHERE id = ? ";
+$id = intval($_GET['id']);
+$email = $_SESSION['email'] ?? '';
 
-$comando = mysqli_prepare($conexao, $sql);
+if (str_ends_with($email, '@lojaexemplo.com')) {
+    $tabela = 'tb_adm';
+} else {
+    $tabela = 'tb_usuario';
+}
 
-mysqli_stmt_bind_param($comando, "i", $id);
+// Se for usuário comum, apaga dependências antes
+if ($tabela === 'tb_usuario') {
+    $sqlDependencias = "DELETE FROM tb_usuario_jogos WHERE usuario_id = ?";
+    $stmtDep = mysqli_prepare($conexao, $sqlDependencias);
+    mysqli_stmt_bind_param($stmtDep, "i", $id);
+    mysqli_stmt_execute($stmtDep);
+    mysqli_stmt_close($stmtDep);
+}
 
-mysqli_stmt_execute($comando);
+// Agora apaga o usuário/adm
+$sql = "DELETE FROM $tabela WHERE id = ?";
+$stmt = mysqli_prepare($conexao, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id);
 
-header("Location: index.php");
+if (mysqli_stmt_execute($stmt)) {
+    mysqli_stmt_close($stmt);
+    session_destroy(); // encerra a sessão
+    header("Location: index.php");
+    exit;
+} else {
+    $erro = mysqli_stmt_error($stmt);
+    mysqli_stmt_close($stmt);
+    die("Erro ao excluir: $erro");
+}
 ?>

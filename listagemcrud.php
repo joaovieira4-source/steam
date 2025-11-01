@@ -6,7 +6,6 @@ $email = $_SESSION['email'] ?? null;
 require_once "conexao.php";
 
 // Buscar todos os jogos com o nome da categoria
-$teste = $_GET['teste'];
 $sql = "SELECT j.*, c.nome AS categoria_nome 
         FROM tb_jogos j
         JOIN categoria c ON j.categoria_id = c.id";
